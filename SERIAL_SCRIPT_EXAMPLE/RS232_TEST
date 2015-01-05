@@ -1,0 +1,119 @@
+#!/bin/bash
+# RS232_TEST - RxTx test baud and handshake test
+#$1 - serial port to test
+#$2 - Type of serial interface 
+#$3 - Test file or string
+
+script="SERIAL TEST $1 $2"
+util="$VAR_ARCH/serial_client"
+#data="$VAR_BUILD/example.txt"
+
+port=$1
+serial=$2
+testfile=$3
+error=0
+count=0
+retry_count=0
+
+# import functions
+source print.sh
+source general.sh
+
+# Show argument list
+usage()
+{
+    echo " $script "
+	echo " serial RxTx and baud rate test "
+	echo " [ port - serial port to test ]"
+	echo " [ serial - type of serial interface ] "
+	echo " [ testfile - test file ] "
+    echo " example : $script /dev/ttyS0 RS232 test1.txt"
+}
+
+## Functions
+
+#
+# START
+#
+
+print_title "$script"
+
+# check arguments are correct
+if [ $# -ne $arguments ]; then
+	print_error "incorrect number of arguments, read $# expect $arguments"
+	usage
+	printf "\n"
+	return 1
+fi
+
+# check files can be found
+if [ ! -e $utility ]; then
+	printf_error "${utility} not found"
+	printf "\n"
+	return 1
+fi
+
+if [ ! -e $data ]; then 
+	print_error "${data} not found"
+	printf "\n"
+	return 1
+fi
+
+## Body of test script
+error=0
+count=0
+retry_count=0
+
+#Set port attributes
+$VAR_ARCH/set_serial RS232 0 0
+ 
+for baud in 115200 57600 38400 19200 9600 4800 2400 1200 600 300
+do
+    retry=3
+    while (( retry != 0 )); do
+        ./$VAR_ARCH/serial_client $port 115200 "$(< $testfile)" $baud $serial
+        retval=$?
+        if [ $retval -eq 1 ]; then
+            retry=0
+            break
+        fi
+        if [ $retval -ne 0 ]; then
+            ((retry--))
+            ((retry_count++))
+        else
+            break
+        fi
+        sleep 1
+    done
+    if [ $retry -eq 0 ]; then
+        print_error " Serial comms test failure"
+        print_error " port $2 type $serial baud $baud"
+
+        if [ $retval -eq 1 ]; then
+            print_error " application failure "
+        fi
+        if [ $retval -eq 2 ]; then
+            print_error " write failure "
+        fi
+        if [ $retval -eq 3 ]; then
+            print_error " write retry failure "
+        fi
+        if [ $retval -eq 4 ]; then
+            print_error " write command failure "
+        fi
+        if [ $retval -eq 5 ]; then
+            print_error " read data compare failure "
+        fi
+        if [ $retval -eq 6 ]; then
+            print_error " read data count failure "
+        fi
+        (( error++ ))
+        break
+    fi
+    sleep 1
+done
+
+return $error
+
+#EOF
+

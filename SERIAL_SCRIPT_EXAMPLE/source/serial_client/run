@@ -1,0 +1,24 @@
+#!/bin/bash
+#ISIS specific script to test COM1 RS232 and COM2 RS232/422/485
+
+file=test1.txt 
+
+# RS232 ttyS0 used to control RELAY  
+./set_serial.sh RS232 RELAY /dev/ttyS0
+source ./baudtest.sh /dev/ttyS0 RS232 $file 
+if [ $? -ne 0 ]; then exit 1; fi
+
+./set_serial.sh RS232 RELAY /dev/ttyS0
+source ./baudtest.sh /dev/ttyS1 RS232 $file
+if [ $? -ne 0 ]; then exit 1; fi
+
+./set_serial.sh RS422 RELAY /dev/ttyS0
+source ./baudtest.sh /dev/ttyS1 RS422 $file
+if [ $? -ne 0 ]; then exit 1; fi
+
+./set_serial.sh RS485 RELAY /dev/ttyS0
+source ./baudtest.sh /dev/ttyS1 RS485 $file
+if [ $? -ne 0 ]; then exit 1; fi
+
+#EOF
+

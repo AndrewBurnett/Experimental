@@ -1,0 +1,78 @@
+
+ RELAY CONTROL
+ Set RS232
+
+ SERIAL TEST 
+ Protocol	: RS232 
+ Port		: /dev/ttyS0 
+ Data		: 97 bytes 
+ Baud 115200	: OK 
+ Baud 57600	: OK 
+ Baud 38400	: OK 
+ Baud 19200	: OK 
+ Baud 9600	: OK 
+ Baud 4800	: OK 
+ Baud 2400	: OK 
+ Baud 1200	: OK 
+ Baud 600	: OK 
+ Baud 300	: OK 
+ PASS
+
+ RELAY CONTROL
+ Set RS232
+
+ SERIAL TEST 
+ Protocol	: RS232 
+ Port		: /dev/ttyS1 
+ Data		: 97 bytes 
+ Baud 115200	: OK 
+ Baud 57600	: OK 
+ Baud 38400	: OK 
+ Baud 19200	: OK 
+ Baud 9600	: OK 
+ Baud 4800	: OK 
+ Baud 2400	: OK 
+ Baud 1200	: OK 
+ Baud 600	: OK 
+ Baud 300	: OK 
+ PASS
+
+ RELAY CONTROL
+ Set RS422
+
+
+ SERIAL TEST 
+ Protocol	: RS422 
+ Port		: /dev/ttyS1 
+ Data		: 97 bytes 
+ Baud 115200	: OK 
+ Baud 57600	: OK 
+ Baud 38400	: OK 
+ Baud 19200	: OK 
+ Baud 9600	: OK 
+ Baud 4800	: OK 
+ Baud 2400	: OK 
+ Baud 1200	: OK 
+ Baud 600	: OK 
+ Baud 300	: OK 
+ PASS
+
+ RELAY CONTROL
+ Set RS485
+
+
+ SERIAL TEST 
+ Protocol	: RS485 
+ Port		: /dev/ttyS1 
+ Data		: 97 bytes 
+ Baud 115200	: OK 
+ Baud 57600	: OK 
+ Baud 38400	: OK 
+ Baud 19200	: OK 
+ Baud 9600	: OK 
+ Baud 4800	: OK 
+ Baud 2400	: OK 
+ Baud 1200	: OK 
+ Baud 600	: OK 
+ Baud 300	: OK 
+ PASS

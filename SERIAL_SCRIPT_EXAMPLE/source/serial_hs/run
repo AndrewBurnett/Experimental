@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo -e  "\n Test : ttyS0"
+source ./handshake_test.sh /dev/ttyS0
+if [ $? -ne 0 ]; then exit 1; fi
+
+echo -e "\n Test : ttyS1"
+source ./handshake_test.sh /dev/ttyS1
+if [ $? -ne 0 ]; then exit 1; fi
+
+echo -e "\n"

@@ -1,0 +1,16 @@
+#!/bin/bash
+#For USB interface cable, the test does not function with larger files e.g. test5.txt  
+
+file=test1.txt 
+
+./com2_cntrl.sh DISABLE
+
+echo " Attach RS232 cable "
+echo " Press any key to continue "
+read -n 1
+
+./set_serial.sh RS232 RELAY /dev/ttyS0
+source ./baudtest.sh /dev/ttyS1 RS232 $file
+
+#EOF
+
